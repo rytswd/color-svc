@@ -1,5 +1,5 @@
 # Build
-FROM golang:1.15 as build
+FROM golang:1.15-alpine as build
 
 WORKDIR /go/src/github.com/rytwsd/color-svc
 
