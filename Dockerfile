@@ -4,7 +4,7 @@ FROM golang:1.15 as build
 WORKDIR /go/src/github.com/rytwsd/color-svc
 
 COPY go.mod go.mod
-COPY go.sum go.sum
+# COPY go.sum go.sum
 
 RUN go mod download
 
