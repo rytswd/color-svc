@@ -14,6 +14,6 @@ RUN go build -v -i -o dist/color-svc ./cmd/server/
 # Run
 FROM rytswd/toolkit-alpine:0.1.1
 
-COPY --from=build /go/src/github.com/rytwsd/color-svc/color-svc /usr/local/bin/
+COPY --from=build /go/src/github.com/rytwsd/color-svc/dist/color-svc /usr/local/bin/
 
 ENTRYPOINT ["color-svc"]
