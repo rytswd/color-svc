@@ -18,6 +18,19 @@ The simplest way to get `color-svc` server started is the following:
 $ docker run -it --rm \
     -p 8800:8800 \
     rytswd/color-svc:latest color-svc
+
+# Output
+2020/12/17 13:12:22 Server setup complete.
+2020/12/17 13:12:22     Red    Enabled: true
+2020/12/17 13:12:22     Green  Enabled: true
+2020/12/17 13:12:22     Blue   Enabled: true
+2020/12/17 13:12:22     Yellow Enabled: true
+2020/12/17 13:12:22
+2020/12/17 13:12:22     Total Available Colors: 15
+2020/12/17 13:12:22 Server starting
+...
+
+# More log lines will appear as request is handled
 ```
 
 With the server running, you can use the following:
