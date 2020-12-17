@@ -35,11 +35,9 @@ $ curl http://localhost:8800/random/
 
 ## 🏁 How to use
 
-### With Docker
-
 <details>
 
-<summary>Click to expand</summary>
+<summary>With Docker</summary>
 
 The simplest way to get started is the following:
 
@@ -62,11 +60,9 @@ $ docker run -it --rm \
 
 </details>
 
-### With Kubernetes
-
 <details>
 
-<summary>Click to expand</summary>
+<summary>With Kubernetes</summary>
 
 This repository contains example Kubernetes Service + Deployment YAMLs in [/k8s](k8s) directory.
 
@@ -84,11 +80,9 @@ $ kubectl apply \
 
 </details>
 
-### From code
-
 <details>
 
-<summary>Click to expand</summary>
+<summary>From code</summary>
 
 Simply run with `go run cmd/server/main.go`. You can provide environmental variables to adjust some behaviours.
 
