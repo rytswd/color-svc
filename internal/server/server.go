@@ -44,13 +44,7 @@ func NewServer(router *http.ServeMux, opts ...Option) {
 	s.compileMiddlewares()
 	s.routes()
 
-	log.Printf("Server setup complete.\n")
-	log.Printf("\tRed    Enabled: %t", !s.disableRed)
-	log.Printf("\tGreen  Enabled: %t", !s.disableGreen)
-	log.Printf("\tBlue   Enabled: %t", !s.disableBlue)
-	log.Printf("\tYellow Enabled: %t", !s.disableYellow)
-	log.Println()
-	log.Printf("\tTotal Available Colors: %d", len(s.allColors))
+	s.logStartupSetup()
 }
 
 func (s *Server) compileMiddlewares() {
@@ -106,4 +100,32 @@ func (s *Server) registerHandleFunc(path string, h http.HandlerFunc) {
 	}
 
 	s.router.HandleFunc(path, wrapped)
+}
+
+func (s *Server) logStartupSetup() {
+	log.Printf(`Server setup complete.
+
+	Per Request Delay: %s
+
+	Red    : %s
+	Green  : %s
+	Blue   : %s
+	Yellow : %s
+
+	Total Available Colors: %d
+
+`,
+		boolToEnabled(s.enableDelay),
+		boolToEnabled(!s.disableRed),
+		boolToEnabled(!s.disableGreen),
+		boolToEnabled(!s.disableBlue),
+		boolToEnabled(!s.disableYellow),
+		len(s.allColors))
+}
+
+func boolToEnabled(b bool) string {
+	if b {
+		return "Enabled"
+	}
+	return "Disabled"
 }
