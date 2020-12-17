@@ -1,6 +1,7 @@
 package server
 
 import (
+	"log"
 	"net/http"
 	"time"
 
@@ -42,6 +43,14 @@ func NewServer(router *http.ServeMux, opts ...Option) {
 
 	s.compileMiddlewares()
 	s.routes()
+
+	log.Printf("Server setup complete.\n")
+	log.Printf("\tRed    Enabled: %t", !s.disableRed)
+	log.Printf("\tGreen  Enabled: %t", !s.disableGreen)
+	log.Printf("\tBlue   Enabled: %t", !s.disableBlue)
+	log.Printf("\tYellow Enabled: %t", !s.disableYellow)
+	log.Println()
+	log.Printf("\tTotal Available Colors: %d", len(s.allColors))
 }
 
 func (s *Server) compileMiddlewares() {
