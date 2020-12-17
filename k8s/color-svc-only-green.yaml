@@ -8,8 +8,8 @@ metadata:
 spec:
   ports:
     - name: http
-      port: 8000
-      targetPort: 80
+      port: 8800
+      targetPort: 8800
   selector:
     app.kubernetes.io/name: color-svc-only-green
 ---
@@ -35,6 +35,8 @@ spec:
           name: color-svc
           command:
             - color-svc
+          ports:
+            - containerPort: 8800
           env:
             - name: ENABLE_DELAY
               value: "true"
@@ -46,3 +48,10 @@ spec:
               value: "true"
             - name: DISABLE_YELLOW
               value: "true"
+          resources:
+            requests:
+              cpu: 10m
+              memory: 10Mi
+            limits:
+              cpu: 30m
+              memory: 30Mi
