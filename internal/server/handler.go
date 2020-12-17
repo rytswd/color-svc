@@ -16,6 +16,7 @@ var now = time.Now
 func (s *Server) handleRandom() http.HandlerFunc {
 	return func(w http.ResponseWriter, r *http.Request) {
 		if len(s.allColors) == 0 {
+			w.WriteHeader(http.StatusInternalServerError)
 			w.Write([]byte("ERROR: no color available\n"))
 			return
 		}
@@ -33,6 +34,7 @@ func (s *Server) handleRandom() http.HandlerFunc {
 func (s *Server) handleSpecific() http.HandlerFunc {
 	return func(w http.ResponseWriter, r *http.Request) {
 		if len(s.allColors) == 0 {
+			w.WriteHeader(http.StatusInternalServerError)
 			w.Write([]byte("ERROR: no color available\n"))
 			return
 		}
