@@ -2,6 +2,14 @@
 
 Simple HTTP server that gives you random color output.
 
+## 🌅 Contents
+
+- [Getting Started](#-getting-started)
+- [Why and What is this for?](#-why-and-what-is-this-for)
+- [Available Endpoints](#-available-endpoints)
+- [How to Use](#-how-to-use)
+- [Server Configurations](#-server-configurations)
+
 ## 🚀 Getting Started
 
 The simplest way to get `color-svc` server started is the following:
@@ -21,6 +29,10 @@ $ curl http://localhost:8800/random/
   Generated Color
     "Green" - with HEX "#008000"
 ```
+
+## ❓ Why and What is this for?
+
+This is originally created for testing Service Mesh. The server is meant to be really simple, but provides different output depending on how you start up the server.
 
 ## 🧪 Available Endpoints
 
