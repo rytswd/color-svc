@@ -73,22 +73,14 @@ func (s *Server) compileMiddlewares() {
 }
 
 func (s *Server) routes() {
-	s.registerHandleFunc("/random/", s.handleRandom())
-	s.registerHandleFunc("/get/", s.handleSpecific())
+	s.registerHandleFunc("/random", s.handleRandom())
 
-	if !s.disableRed {
-		s.registerHandleFunc("/red/", s.handleRed())
-	}
-	if !s.disableGreen {
-		s.registerHandleFunc("/green/", s.handleGreen())
-	}
-	if !s.disableBlue {
-		s.registerHandleFunc("/blue/", s.handleBlue())
-	}
-	if !s.disableYellow {
-		s.registerHandleFunc("/yellow/", s.handleYellow())
-	}
+	s.registerHandleFunc("/random/red", s.handleRed())
+	s.registerHandleFunc("/random/green", s.handleGreen())
+	s.registerHandleFunc("/random/blue", s.handleBlue())
+	s.registerHandleFunc("/random/yellow", s.handleYellow())
 
+	s.registerHandleFunc("/", s.handleSpecific())
 }
 
 // registerHandleFunc is essentially (*http.ServeMux).HandleFunc, but it chains

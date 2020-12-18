@@ -5,8 +5,8 @@ package color
 
 // Color holds color information.
 type Color struct {
-	Name    string
-	HexCode string
+	Name    string `json:"name"`
+	HexCode string `json:"hexCode"`
 }
 
 // AllColors returns all available colors.
