@@ -1,0 +1,98 @@
+name: Publish Docker image
+on:
+  push:
+    # Publish `main` as Docker `latest` image.
+    branches:
+      - main
+    # Publish `v1.2.3` tags as releases.
+    tags:
+      - v*
+    paths:
+      - cmd/**
+      - internal/**
+  # release:
+  #   types:
+  #     - published
+
+jobs:
+  parse-version:
+    name: Prepare Version Tag
+    runs-on: ubuntu-latest
+    outputs:
+      version: ${{ steps.parse.outputs.version }}
+      created: ${{ steps.parse.outputs.created }}
+    steps:
+      - name: Parse version information
+        id: parse
+        # Taken mostly from https://github.com/docker/build-push-action/blob/master/UPGRADE.md#tags-with-ref-and-git-labels
+        run: |
+          # Strip git ref prefix from version
+          VERSION=$(echo "${{ github.ref }}" | sed -e 's,.*/\(.*\),\1,')
+
+          # Strip "v" prefix from tag name
+          [[ "${{ github.ref }}" == "refs/tags/"* ]] && VERSION=$(echo $VERSION | sed -e 's/^v//')
+
+          # Use Docker `latest` tag convention
+          [ "$VERSION" == "main" ] && VERSION=latest
+
+          echo ::set-output name=version::${VERSION}
+          echo ::set-output name=created::$(date -u +'%Y-%m-%dT%H:%M:%SZ')
+
+  # NOTE: The bulid itself is done in Docker Hub as well. This doesn't seem to
+  #       cause any issue, but essentially this step is meaningless. Keeping
+  #       this step as I hope GitHub Actions will enable publishing Dockerfile
+  #       in the future.
+  # publish-to-docker:
+  #   name: Publish to Docker
+  #   runs-on: ubuntu-latest
+  #   needs: parse-version
+  #   env:
+  #     REGISTRY: docker.io
+  #     REPO_NAME: rytswd/color-svc
+
+  #   steps:
+  #     - name: Check out the repo
+  #       uses: actions/checkout@v2
+  #     - name: Set up Docker Buildx
+  #       uses: docker/setup-buildx-action@v1
+  #     - name: Login to DockerHub
+  #       uses: docker/login-action@v1
+  #       with:
+  #         username: ${{ secrets.DOCKER_USERNAME }}
+  #         password: ${{ secrets.DOCKER_PASSWORD }}
+  #     - name: Build and push to Docker
+  #       uses: docker/build-push-action@v2
+  #       with:
+  #         context: .
+  #         file: ./Dockerfile
+  #         pull: true
+  #         push: true
+  #         tags: ${{ env.REGISTRY }}/${{ env.REPO_NAME }}:${{ needs.parse-version.outputs.version }}
+
+  publish-to-ghcr:
+    name: Publish to GitHub Container Registry
+    runs-on: ubuntu-latest
+    needs: parse-version
+    env:
+      REGISTRY: ghcr.io
+      REPO_NAME: rytswd/color-svc
+
+    steps:
+      - name: Check out the repo
+        uses: actions/checkout@v2
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v1
+      - name: Login to GitHub Container Registry
+        uses: docker/login-action@v1
+        with:
+          registry: ghcr.io
+          username: ${{ github.repository_owner }}
+          password: ${{ secrets.CR_PAT }}
+      - name: Build and push to GitHub Container Registry
+        uses: docker/build-push-action@v2
+        with:
+          context: .
+          file: ./Dockerfile
+          pull: true
+          push: true
+          tags: ${{ env.REGISTRY }}/${{ env.REPO_NAME }}:${{ needs.parse-version.outputs.version }}
