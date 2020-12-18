@@ -40,7 +40,7 @@ $ docker run -it --rm \
 With the server running, you can use the following:
 
 ```bash
-$ curl http://localhost:8800/random/
+$ curl 'http://localhost:8800/random'
 
 # Output
   Generated Color
