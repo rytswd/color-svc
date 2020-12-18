@@ -10,4 +10,6 @@ var BluishColors = []BlueColor{
 	{Name: "Teal", HexCode: "#008080"},
 	{Name: "Aqua", HexCode: "#00ffff"},
 	{Name: "Aliceblue", HexCode: "#f0f8ff"},
+	{Name: "Azure", HexCode: "#f0ffff"},
+	{Name: "Blue Violet", HexCode: "#8a2be2"},
 }
