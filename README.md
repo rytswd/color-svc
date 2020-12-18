@@ -53,14 +53,14 @@ This is originally created for testing Service Mesh. The server is meant to be r
 
 ## 🧪 Available Endpoints
 
-| Endpoint          | Description                                                                                       |
-| ----------------- | ------------------------------------------------------------------------------------------------- |
-| `/random/`        | Generate random color, based on available color set                                               |
-| `/get/SOME_COLOR` | Get specific color - `SOME_COLOR` is case insensitive, and when not found, you will get "unknown" |
-| `/red/`           | Generate random redish color. Can be disabled by environmental variable.                          |
-| `/green/`         | Generate random greenish color. Can be disabled by environmental variable.                        |
-| `/blue/`          | Generate random bluish color. Can be disabled by environmental variable.                          |
-| `/yellow/`        | Generate random yellowish color. Can be disabled by environmental variable.                       |
+| Endpoint         | Description                                                                                       |
+| ---------------- | ------------------------------------------------------------------------------------------------- |
+| `/random`        | Generate random color, based on available color set                                               |
+| `/random/red`    | Generate random redish color, returns error if disabled                                           |
+| `/random/green`  | Generate random greenish color, returns error if disabled                                         |
+| `/random/blue`   | Generate random bluish color, returns error if disabled                                           |
+| `/random/yellow` | Generate random yellowish color, returns error if disabled                                        |
+| `/SOME_COLOR`    | Get specific color - `SOME_COLOR` is case insensitive, and when not found, you will get "unknown" |
 
 ## 🏁 How to use
 
