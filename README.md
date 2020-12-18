@@ -4,11 +4,15 @@ Simple HTTP server that gives you random color output.
 
 ## 🌅 Contents
 
-- [Getting Started](#-getting-started)
 - [Why and What is this for?](#-why-and-what-is-this-for)
+- [Getting Started](#-getting-started)
 - [Available Endpoints](#-available-endpoints)
 - [How to Use](#-how-to-use)
 - [Server Configurations](#-server-configurations)
+
+## ❓ Why and What is this for?
+
+This is originally created for testing Service Mesh. The server is meant to be really simple, but provides different output depending on how you start up the server.
 
 ## 🚀 Getting Started
 
@@ -47,11 +51,7 @@ $ curl 'http://localhost:8800/random'
     "Green" - with HEX "#008000"
 ```
 
-## ❓ Why and What is this for?
-
-This is originally created for testing Service Mesh. The server is meant to be really simple, but provides different output depending on how you start up the server.
-
-## 🧪 Available Endpoints
+## 🚥 Available Endpoints
 
 | Endpoint         | Description                                                                                       |
 | ---------------- | ------------------------------------------------------------------------------------------------- |
@@ -61,6 +61,12 @@ This is originally created for testing Service Mesh. The server is meant to be r
 | `/random/blue`   | Generate random bluish color, returns error if disabled                                           |
 | `/random/yellow` | Generate random yellowish color, returns error if disabled                                        |
 | `/SOME_COLOR`    | Get specific color - `SOME_COLOR` is case insensitive, and when not found, you will get "unknown" |
+
+## 🧪 Request Parameters
+
+| Parameter   | Description                |
+| ----------- | -------------------------- |
+| `?fmt=json` | Return JSON representation |
 
 ## 🏁 How to use
 
@@ -86,6 +92,8 @@ $ docker run -it --rm \
     -e DISABLE_YELLOW=true \
     rytswd/color-svc:latest color-svc
 ```
+
+Also, the container is pushed to GitHub Container Registry at `ghcr.io/rytswd/color-svc`.
 
 </details>
 
@@ -119,7 +127,7 @@ Simply run with `go run cmd/server/main.go`. You can provide environmental varia
 
 ## ⚙️ Server Configurations
 
-The following environmental variables are used when starting the server.
+The following environmental variables are read when the server starts up.
 
 | Env Name                     | Description                                                    | Default |
 | ---------------------------- | -------------------------------------------------------------- | ------- |
