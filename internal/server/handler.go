@@ -80,6 +80,7 @@ func (s *Server) handleGreen() http.HandlerFunc {
 		writeResponse(w, r.URL.Query(), color.Color(c))
 	}
 }
+
 func (s *Server) handleBlue() http.HandlerFunc {
 	return func(w http.ResponseWriter, r *http.Request) {
 		if s.disableBlue {
@@ -94,6 +95,7 @@ func (s *Server) handleBlue() http.HandlerFunc {
 		writeResponse(w, r.URL.Query(), color.Color(c))
 	}
 }
+
 func (s *Server) handleYellow() http.HandlerFunc {
 	return func(w http.ResponseWriter, r *http.Request) {
 		if s.disableYellow {

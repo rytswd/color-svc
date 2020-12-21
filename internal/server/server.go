@@ -16,8 +16,10 @@ type Server struct {
 	allColors   []color.Color
 
 	// Option driven fields
-	enableDelay   bool
-	delay         time.Duration
+	isDelayEnabled bool
+	delay          time.Duration
+	isCORSEnabled  bool
+
 	disableRed    bool
 	disableGreen  bool
 	disableBlue   bool
@@ -54,8 +56,12 @@ func (s *Server) compileMiddlewares() {
 	middlewares = append(middlewares, s.log)
 
 	// Delay handling
-	if s.enableDelay {
+	if s.isDelayEnabled {
 		middlewares = append(middlewares, s.addDelay)
+	}
+
+	if s.isCORSEnabled {
+		middlewares = append(middlewares, s.enableCORS)
 	}
 
 	// Reverse the order of middlewares, this is to ensure that middlewares
@@ -104,14 +110,17 @@ func (s *Server) logStartupSetup() {
 	Blue   : %s
 	Yellow : %s
 
+	CORS Enabled : %s
+
 	Total Available Colors: %d
 
 `,
-		boolToEnabled(s.enableDelay),
+		boolToEnabled(s.isDelayEnabled),
 		boolToEnabled(!s.disableRed),
 		boolToEnabled(!s.disableGreen),
 		boolToEnabled(!s.disableBlue),
 		boolToEnabled(!s.disableYellow),
+		boolToEnabled(s.isCORSEnabled),
 		len(s.allColors))
 }
 

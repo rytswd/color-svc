@@ -17,6 +17,9 @@ func main() {
 	if isEnvTrue("ENABLE_DELAY") {
 		options = append(options, server.WithDelay(time.Duration(delay)*time.Millisecond))
 	}
+	if isEnvTrue("ENABLE_CORS") {
+		options = append(options, server.WithCORSEnabled())
+	}
 	if isEnvTrue("DISABLE_RED") {
 		options = append(options, server.WithDisabledRed())
 	}

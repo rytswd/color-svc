@@ -20,3 +20,10 @@ func (s *Server) log(h http.HandlerFunc) http.HandlerFunc {
 		log.Printf("Responding")
 	}
 }
+
+func (s *Server) enableCORS(h http.HandlerFunc) http.HandlerFunc {
+	return func(w http.ResponseWriter, r *http.Request) {
+		w.Header().Set("Access-Control-Allow-Origin", "*")
+		h(w, r)
+	}
+}

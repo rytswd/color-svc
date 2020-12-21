@@ -5,7 +5,7 @@ import "time"
 // WithDelay adds provided duration as server response delay. If no duration provided,
 func WithDelay(d time.Duration) Option {
 	return func(s *Server) {
-		s.enableDelay = true
+		s.isDelayEnabled = true
 		if d != 0 {
 			d = 1 * time.Second
 		}
@@ -38,5 +38,13 @@ func WithDisabledBlue() Option {
 func WithDisabledYellow() Option {
 	return func(s *Server) {
 		s.disableYellow = true
+	}
+}
+
+// WithCORSEnabled allows CORS. This is NOT recommended for production use
+// cases, and should be used only for testing.
+func WithCORSEnabled() Option {
+	return func(s *Server) {
+		s.isCORSEnabled = true
 	}
 }
