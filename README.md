@@ -33,6 +33,9 @@ $ docker run -it --rm \
         Blue   : Enabled
         Yellow : Enabled
 
+        CORS Enabled    : Disabled
+        Logging Enabled : Disabled
+
         Total Available Colors: 15
 
 2020/12/17 13:12:22 Server starting
@@ -133,6 +136,8 @@ The following environmental variables are read when the server starts up.
 | ---------------------------- | -------------------------------------------------------------- | ------- |
 | `ENABLE_DELAY`               | Enable delay for all requests                                  | false   |
 | `DELAY_DURATION_MILLISECOND` | Delay duration in millisecond, only used when delay is enabled | 1000    |
+| `ENABLE_CORS`                | Enable CORS                                                    | false   |
+| `DISABLE_LOGGING`            | Disable per request logging                                    | false   |
 | `DISABLE_RED`                | Disable all redish colors                                      | false   |
 | `DISABLE_GREEN`              | Disable all greenish colors                                    | false   |
 | `DISABLE_BLUE`               | Disable all bluish colors                                      | false   |
