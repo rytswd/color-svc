@@ -20,6 +20,9 @@ func main() {
 	if isEnvTrue("ENABLE_CORS") {
 		options = append(options, server.WithCORSEnabled())
 	}
+	if isEnvTrue("DISABLE_LOGGING") {
+		options = append(options, server.WithLoggingDisabled())
+	}
 	if isEnvTrue("DISABLE_RED") {
 		options = append(options, server.WithDisabledRed())
 	}

@@ -48,3 +48,11 @@ func WithCORSEnabled() Option {
 		s.isCORSEnabled = true
 	}
 }
+
+// WithLoggingDisabled disables logging for each incoming request. Even with
+// this option, you will see startup and error logs.
+func WithLoggingDisabled() Option {
+	return func(s *Server) {
+		s.isLoggingDisabled = true
+	}
+}

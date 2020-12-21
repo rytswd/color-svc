@@ -16,9 +16,10 @@ type Server struct {
 	allColors   []color.Color
 
 	// Option driven fields
-	isDelayEnabled bool
-	delay          time.Duration
-	isCORSEnabled  bool
+	isDelayEnabled    bool
+	delay             time.Duration
+	isCORSEnabled     bool
+	isLoggingDisabled bool
 
 	disableRed    bool
 	disableGreen  bool
@@ -53,13 +54,16 @@ func (s *Server) compileMiddlewares() {
 	middlewares := []func(h http.HandlerFunc) http.HandlerFunc{}
 
 	// Make sure log middleware is the first one
-	middlewares = append(middlewares, s.log)
+	if !s.isLoggingDisabled {
+		middlewares = append(middlewares, s.log)
+	}
 
 	// Delay handling
 	if s.isDelayEnabled {
 		middlewares = append(middlewares, s.addDelay)
 	}
 
+	// CORS handling
 	if s.isCORSEnabled {
 		middlewares = append(middlewares, s.enableCORS)
 	}
