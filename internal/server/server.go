@@ -114,8 +114,8 @@ func (s *Server) logStartupSetup() {
 	Blue   : %s
 	Yellow : %s
 
-	CORS Enabled    : %s
-	Logging Enabled : %s
+	CORS    : %s
+	Logging : %s
 
 	Total Available Colors: %d
 

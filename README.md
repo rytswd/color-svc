@@ -33,8 +33,8 @@ $ docker run -it --rm \
         Blue   : Enabled
         Yellow : Enabled
 
-        CORS Enabled    : Disabled
-        Logging Enabled : Disabled
+        CORS    : Disabled
+        Logging : Enabled
 
         Total Available Colors: 15
 
