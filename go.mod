@@ -1,3 +1,5 @@
 module github.com/rytswd/color-svc
 
 go 1.15
+
+require github.com/google/go-cmp v0.5.4
