@@ -10,5 +10,5 @@ var YellowishColors = []YellowColor{
 	{Name: "Orange", HexCode: "#ffa500"},
 	{Name: "Beige", HexCode: "#f5f5dc"},
 	{Name: "Bisque", HexCode: "#ffe4c4"},
-	{Name: "Blanched Almond", HexCode: "#ffebcd"},
+	{Name: "BlanchedAlmond", HexCode: "#ffebcd"},
 }
