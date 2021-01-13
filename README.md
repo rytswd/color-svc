@@ -2,6 +2,13 @@
 
 Simple HTTP server that gives you random color output.
 
+[![Build Status](https://github.com/rytswd/color-svc/workflows/build-test/badge.svg)](build-status) | [![License: MIT](https://img.shields.io/badge/License-MIT-powderblue.svg)](mit) | [![GitHub Release Date](https://img.shields.io/github/release-date/rytswd/color-svc?color=powderblue)](releases) | [![Docker Image Version (latest semver)](https://img.shields.io/docker/v/rytswd/color-svc?color=powderblue&sort=semver)](docker-release)
+
+[build-status]: https://github.com/rytswd/color-svc/actions
+[mit]: https://opensource.org/licenses/MIT
+[releases]: https://github.com/rytswd/color-svc/releases
+[docker-release]: https://hub.docker.com/r/rytswd/color-svc
+
 ## 🌅 Contents
 
 - [Why and What is this for?](#-why-and-what-is-this-for)
