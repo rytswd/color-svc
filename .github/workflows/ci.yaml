@@ -1,0 +1,42 @@
+name: Go CI
+
+on:
+  pull_request:
+    paths:
+      - "**"
+      - "!.github/**"
+      - "!k8s/**"
+      - "!Dockerfile"
+      - "!README.md"
+  push:
+    branches:
+      - main
+    paths:
+      - "**"
+      - "!.github/**"
+      - "!k8s/**"
+      - "!Dockerfile"
+      - "!README.md"
+
+jobs:
+  build-go:
+    name: Build & cache Go code
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        go:
+          - "1.15.6"
+          - "1.14"
+    steps:
+      - name: Check out code
+        uses: actions/checkout@v2
+      - name: Set up Go
+        uses: actions/setup-go@v2
+        with:
+          go-version: ${{ matrix.go }}
+      - name: Build
+        run: |
+          go build ./...
+      - name: Test
+        run: |
+          go test ./...
