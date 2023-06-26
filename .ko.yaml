@@ -1,0 +1,7 @@
+defaultBaseImage: "rytswd/toolkit-alpine"
+defaultPlatforms:
+  - linux/arm64
+  - linux/amd64
+builds:
+  - id: color-svc
+    dir: ./cmd/color-svc
