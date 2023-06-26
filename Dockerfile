@@ -9,7 +9,7 @@ COPY go.mod go.mod
 RUN go mod download
 
 COPY . .
-RUN go build -v -i -o dist/color-svc ./cmd/server/
+RUN go build -v -i -o dist/color-svc ./cmd/color-svc/
 
 # Run
 FROM rytswd/toolkit-alpine:0.1.1
