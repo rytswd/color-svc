@@ -39,9 +39,10 @@ func main() {
 	mux := http.NewServeMux()
 	server.NewServer(mux, options...)
 
-	log.Printf("Server starting, listening to port: 8080")
+	port := ":8080"
+	log.Printf("Server starting, listening to port: %v", port)
 
-	if err := http.ListenAndServe(":8800", mux); err != nil {
+	if err := http.ListenAndServe(port, mux); err != nil {
 		log.Fatalf("failed to serve: %v", err)
 	}
 }

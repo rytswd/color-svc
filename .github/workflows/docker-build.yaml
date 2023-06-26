@@ -76,8 +76,15 @@ jobs:
     env:
       REGISTRY: ghcr.io
       REPO_NAME: rytswd/color-svc
+      KO_DOCKER_REPO: ghcr.io/rytswd/color-svc/ko-test
 
     steps:
+      - name: Update env
+        if: always() &&
+          github.event_name != 'pull_request'
+        run: |
+          echo "KO_DOCKER_REPO=${{ env.KO_DOCKER_REPO }}/updated" >> $GITHUB_ENV
+
       - name: Check out the repo
         uses: actions/checkout@v3
       - uses: actions/setup-go@v2
@@ -102,4 +109,6 @@ jobs:
       - uses: ko-build/setup-ko@v0.6
       - name: ko build
         run: |
-          KO_DOCKER_REPO=${{ env.REGISTRY }}/${{ env.REPO_NAME }}/ko-test go list -json ./... | jq -r -s '.[] | select (.Name == "main") | .ImportPath' | xargs ko build -L -
+          go list -json ./... |
+            jq -r -s '.[] | select (.Name == "main") | .ImportPath' |
+            xargs ko build -P
